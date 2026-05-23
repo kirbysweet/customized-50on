@@ -363,18 +363,35 @@ export default function Editor({ initialData }: { initialData: TableData | null 
     const head = theme ? `「${theme}」` : '自分だけのお題';
     return `${head}で五十音表をつくりました！\n#カスタム五十音表メーカー\n${shareUrl}`;
   };
-  const openTweetCompose = (text: string) => {
+  const openTweetCompose = (text: string): boolean => {
     const url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
-    window.open(url, '_blank', 'noopener,noreferrer');
+    const w = window.open(url, '_blank', 'noopener,noreferrer');
+    // ポップアップブロックされた場合は w が null になる
+    if (!w) {
+      // フォールバック: 現在のタブで開く（同一ウィンドウ）
+      // または、リンクをクリックする方式
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return false;
+    }
+    return true;
   };
 
-  const handleShareX = async () => {
+  // ※ 同期関数にする。async にすると Chrome がユーザー操作と無関係と判断してポップアップをブロックすることがある
+  const handleShareX = () => {
     const shareUrl = buildShareUrl();
     const tweetText = buildTweetText(shareUrl);
-    // OGP方式：画像はサーバー側で生成されるので、ツイート文＋URLだけを渡す
-    // (URL末尾にog:image付きのページが入るので、Xカードで画像つきプレビューが出る)
-    openTweetCompose(tweetText);
-    showToast('投稿画面を開きました。\n投稿すると五十音表がカード表示されます。', 5000);
+    const opened = openTweetCompose(tweetText);
+    if (opened) {
+      showToast('投稿画面を開きました。\n投稿すると五十音表がカード表示されます。', 5000);
+    } else {
+      showToast('ポップアップがブロックされたようです。\nアドレスバー右端のアイコンから許可してください。', 6000);
+    }
   };
 
   return (
