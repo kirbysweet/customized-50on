@@ -18,35 +18,6 @@
 - @vercel/og (動的OGP画像生成 / Edge Runtime)
 - html2canvas (ブラウザ側のPNG出力)
 
-## ローカル開発
-
-```bash
-npm install
-npm run dev
-```
-
-http://localhost:3000 で開きます。
-
-## Vercelへのデプロイ
-
-### 初回デプロイ
-
-1. このリポジトリをGitHubにpush
-2. [vercel.com](https://vercel.com) でサインアップ → 「Add New Project」
-3. GitHubリポジトリを連携 → Import
-4. 設定はデフォルトのままで「Deploy」
-5. 数分でデプロイ完了
-
-### 環境変数（任意）
-
-OGP画像のフルパス生成のため、デプロイ後に環境変数 `NEXT_PUBLIC_BASE_URL` を本番URLに設定すると、SNSプレビューがより確実に動作します（例: `https://your-app.vercel.app`）。
-
-Vercelのプロジェクト設定 → Environment Variables から追加可能。
-
-### 独自ドメインを使う場合
-
-Vercelのダッシュボードから「Domains」設定で独自ドメインを追加できます（無料）。
-ドメイン取得サービス（お名前.com、ムームードメイン、Cloudflare Registrarなど）で取ったドメインのDNSをVercelに向けるだけ。
 
 ## ファイル構成
 
