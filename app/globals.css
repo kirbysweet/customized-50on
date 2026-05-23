@@ -1,0 +1,507 @@
+  :root {
+    --paper: #f4ede0;
+    --paper-deep: #ebe0cd;
+    --ink: #1a1714;
+    --ink-soft: #4a3f35;
+    --vermilion: #b33a3a;
+    --vermilion-deep: #8a2828;
+    --gold: #b8893a;
+    --line: rgba(26, 23, 20, 0.18);
+    --line-strong: rgba(26, 23, 20, 0.4);
+    --shadow: 0 24px 60px -20px rgba(60, 40, 20, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #2a221c;
+    color: var(--ink);
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    min-height: 100vh;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at top, #3a2e24 0%, #2a221c 50%, #1a1410 100%);
+    padding: 40px 20px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184, 137, 58, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(179, 58, 58, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+    color: var(--paper);
+  }
+
+  .title-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    padding: 0 40px;
+  }
+
+  .title-wrap::before,
+  .title-wrap::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .title-wrap::before { left: 0; }
+  .title-wrap::after { right: 0; }
+
+  .kicker {
+    font-family: 'Zen Kurenaido', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 44px);
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+  }
+
+  h1 .accent {
+    color: var(--vermilion);
+    position: relative;
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    font-family: 'Klee One', serif;
+    font-size: 13px;
+    color: rgba(244, 237, 224, 0.6);
+    letter-spacing: 0.15em;
+  }
+
+  /* ---- 紙のパネル ---- */
+  .paper {
+    background: var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 39px, rgba(26, 23, 20, 0.02) 39px 40px),
+      radial-gradient(circle at 30% 20%, rgba(184, 137, 58, 0.08), transparent 60%);
+    border-radius: 4px;
+    padding: 40px 36px 36px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .paper::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  /* ---- ツールバー ---- */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toolbar-label {
+    font-family: 'Klee One', serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-right: auto;
+    letter-spacing: 0.1em;
+  }
+
+  .toolbar-label .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--vermilion);
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .btn {
+    font-family: 'Klee One', serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+    border-radius: 2px;
+  }
+
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary {
+    background: var(--vermilion);
+    border-color: var(--vermilion);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--vermilion-deep);
+    border-color: var(--vermilion-deep);
+  }
+
+  .btn-ghost {
+    border-color: var(--line-strong);
+    color: var(--ink-soft);
+  }
+
+  /* Xで共有ボタン: 黒地に白 */
+  .btn-x {
+    background: #0f0f0f;
+    border-color: #0f0f0f;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-x:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+  }
+  .btn-x .x-logo {
+    width: 13px;
+    height: 13px;
+  }
+  .btn-x:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  /* トースト通知 */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Klee One', serif;
+    font-size: 13px;
+    padding: 12px 22px;
+    border-radius: 4px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    letter-spacing: 0.08em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 1000;
+    max-width: 90vw;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ---- テーマタイトル ---- */
+  .theme-strip {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .theme-input {
+    border: none;
+    background: transparent;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--ink);
+    padding: 8px 12px;
+    outline: none;
+    letter-spacing: 0.12em;
+    text-align: center;
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .theme-input::placeholder {
+    color: var(--ink-soft);
+    opacity: 0.3;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  .theme-input:focus {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+  }
+
+  /* ---- 50音表 ---- */
+  .table-wrap {
+    position: relative;
+    padding: 8px;
+  }
+
+  .gojuon {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(96px, auto));
+    gap: 0;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+
+  .cell {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 6px 6px;
+    background: var(--paper);
+    position: relative;
+    min-height: 96px;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+
+  .cell:hover {
+    background: #faf4e8;
+  }
+
+  .cell.empty {
+    background: repeating-linear-gradient(45deg,
+      var(--paper) 0,
+      var(--paper) 8px,
+      var(--paper-deep) 8px,
+      var(--paper-deep) 9px);
+    pointer-events: none;
+  }
+
+  /* 未入力時に表示する大きな頭文字 */
+  .cell .big-kana {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 48px;
+    color: var(--ink);
+    opacity: 0.18;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    user-select: none;
+  }
+
+  /* 入力されたら大きな頭文字を隠す */
+  .cell.filled .big-kana {
+    opacity: 0;
+  }
+
+  .cell .editor {
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: transparent;
+    font-family: 'Klee One', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    font-weight: 500;
+    font-size: var(--cell-fs, 16px);
+    line-height: 1.25;
+    color: var(--ink);
+    padding: 6px;
+    outline: none;
+    text-align: center;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    box-sizing: border-box;
+    /* gridで上下中央。テキストノードでも中央寄せが効く */
+    display: grid;
+    place-content: center;
+    cursor: text;
+  }
+
+  .cell .editor:focus {
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  /* PNG出力時の代替表示 */
+  .textarea-proxy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Klee One', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    font-weight: 500;
+    font-size: var(--cell-fs, 15px);
+    line-height: 1.25;
+    color: var(--ink);
+    padding: 6px;
+    text-align: center;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow: hidden;
+  }
+
+  .theme-proxy {
+    width: 100%;
+    max-width: 720px;
+    text-align: center;
+    font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--ink);
+    padding: 8px 12px;
+    letter-spacing: 0.12em;
+    min-height: 1.4em;
+  }
+
+  /* 一番右の列のセルは右ボーダーを消す */
+  .gojuon > *:nth-child(10n) {
+    border-right: none;
+  }
+  /* 最下行のセルは下ボーダーを消す */
+  .gojuon > *:nth-last-child(-n+10) {
+    border-bottom: none;
+  }
+
+  /* ---- フッター ---- */
+  .meta {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: 'Klee One', serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+
+  .stamp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--vermilion);
+    color: var(--vermilion);
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    transform: rotate(-4deg);
+    border-radius: 4px;
+    line-height: 1.1;
+    text-align: center;
+    padding: 4px;
+  }
+
+  .footnote {
+    margin-top: 24px;
+    text-align: center;
+    color: rgba(244, 237, 224, 0.4);
+    font-family: 'Klee One', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+
+  .save-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Klee One', serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .save-indicator.show { opacity: 1; }
+
+  .save-indicator .check {
+    color: #5a7d3a;
+    font-weight: bold;
+  }
+
+  /* PNG出力用のクラス */
+  .for-export .cell input {
+    border-bottom: none;
+  }
+
+  /* PNG出力時のクレジット表記 */
+  .export-credit {
+    margin-top: 14px;
+    text-align: right;
+    font-family: 'Klee One', 'Hiragino Mincho ProN', serif;
+    font-size: 10px;
+    color: var(--ink-soft);
+    opacity: 0.55;
+    letter-spacing: 0.1em;
+    padding-right: 4px;
+  }
+
+  @media (max-width: 800px) {
+    .paper { padding: 24px 12px 20px; }
+    .gojuon {
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      grid-template-rows: repeat(5, minmax(64px, auto));
+    }
+    .cell { padding: 3px; min-height: 64px; }
+    .cell .big-kana { font-size: 28px; }
+    .cell textarea { padding: 3px; font-size: var(--cell-fs, 11px); }
+    .theme-input { font-size: 20px; }
+    .theme-input::placeholder { font-size: 14px; }
+    .toolbar { gap: 8px; }
+    .toolbar-label { width: 100%; margin-right: 0; }
+    .btn { padding: 8px 12px; font-size: 12px; letter-spacing: 0.06em; }
+    .btn-x .x-logo { width: 11px; height: 11px; }
+  }
